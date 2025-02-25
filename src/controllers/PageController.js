@@ -3,11 +3,16 @@
  * Simple pages will be handled by this controller.
  * A simple page is a page that does not contain many business logic.
  */
-
+ 
 import menuItems from "../data/navigation.js";
 import userData from "../data/user.js";
-
+ 
+import NavigationItem from "../models/NavigationItem.js";
+ 
 export const home = async (req, res) => {
+  const navItems = await NavigationItem.query();
+  //return res.send(navItems);
+ 
   const pageData = {
     title: "Home",
     content: `
@@ -15,15 +20,16 @@ export const home = async (req, res) => {
       <p>Feel free to browse our site and learn more about us.</p>
     `,
   };
-
+ 
   res.render("pages/home", {
     ...pageData,
     userData,
     menuItems,
   });
 };
-
+ 
 export const about = async (req, res) => {
+  const navItems = await NavigationItem.query();
   const pageData = {
     title: "About Us",
     content: `
@@ -37,8 +43,9 @@ export const about = async (req, res) => {
     menuItems,
   });
 };
-
+ 
 export const contact = async (req, res) => {
+  const navItems = await NavigationItem.query();
   const pageData = {
     title: "Contact",
     content: `
